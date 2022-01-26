@@ -1,4 +1,4 @@
-function Sale(props) {
+function UsersSale(props) {
 
     return (
         <div>
@@ -10,4 +10,4 @@ function Sale(props) {
     )
 }
 
-export default Sale;
+export default UsersSale;

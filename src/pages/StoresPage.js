@@ -6,7 +6,8 @@ import axios from "axios";
 class StoresPage extends React.Component {
 
     state = {
-        listStores :[]
+        listStores :[],
+        response : "loading..."
 
     }
 
@@ -21,7 +22,12 @@ class StoresPage extends React.Component {
             .then((response) => {
                 if(response.data.success) {
                     this.setState({
-                        listStores: response.data.dataSet
+                        listStores: response.data.dataSet,
+                        response : ""
+                    })
+                }else{
+                    this.setState({
+                        response : "there was a problem getting sales from db!"
                     })
                 }
             })
@@ -30,14 +36,30 @@ class StoresPage extends React.Component {
 
 
 
+
     render() {
 
         return(
             <div>
+                <span style={{color : "blue"}}>{this.state.response} </span>
+                <br/>
+                Stores List:<br/>
+                ------------------------------------
+                <br/>
+                <ul>
+                    {
+                        this.state.listStores.map(store => {
+                            return(
+                                <li>
+                                    <span> {store.name}</span>
+                                    <br/><br/>
+                                </li>
+                            )
+                        })
+                    }
+                </ul>
 
-
-
-
+                ------------------------------------
             </div>
         )
 

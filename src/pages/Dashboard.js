@@ -1,6 +1,7 @@
 import * as React from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import UsersSale from "../components/UsersSale";
 
 class Dashboard extends React.Component{
 
@@ -34,6 +35,10 @@ class Dashboard extends React.Component{
     }
 
 
+
+
+
+
     render() {
         const salesFiltered = this.state.sales.filter(sale => {
             return sale.belongsToUser
@@ -41,7 +46,9 @@ class Dashboard extends React.Component{
         const salesMapped = salesFiltered.map(sale =>{
             return(
                 <div>
-                   sale description : {sale.object.description}
+                    --------------------------------
+                   <UsersSale object={sale.object}/>
+                    --------------------------------
                 </div>
             )
         })

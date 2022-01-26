@@ -5,7 +5,8 @@ import Homepage from "./pages/Homepage";
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import SearchPage from "./pages/SearchPage";
 import SettingsPage from "./pages/SettingsPage";
-
+import StoresPage from "./pages/StoresPage";
+import StoreComponent from "./components/StoreComponent";
 
 class App extends React.Component {
 
@@ -26,19 +27,22 @@ class App extends React.Component {
                                     <div>
                                         <Routes>
 
-                                            <Route path={"/"} element = {<SettingsPage/>}/>
+                                            <Route path={"/"} element = {<StoresPage/>}/>
+                                            <Route path="/store/:id" component={<StoreComponent />} />
                                         </Routes>
 
                                     </div>
                                     :
                                     <div>
-                                        <Routes>
 
-                                            <Route path={"/dashboard"} element={<Dashboard/>}/>
-                                            <Route path={"/searchPage"} element={<SearchPage/>}/>
-                                            <Route path={"/login"} element={<LoginPage/>}/>
-                                            <Route path={"/"} element = {<SettingsPage/>}/>
-                                        </Routes>
+                                            <Routes>
+                                                <Route path={"/"} element = {<StoresPage/>}/>
+                                                <Route path={"/settingsPage"} element = {<SettingsPage/>}/>
+                                                <Route path="/store/:id" component={<StoreComponent />} />
+                                                <Route path={"/dashboard"} element={<Dashboard/>}/>
+                                                <Route path={"/searchPage"} element={<SearchPage/>}/>
+                                                <Route path={"/login"} element={<LoginPage/>}/>
+                                            </Routes>
 
                                     </div>
                             }

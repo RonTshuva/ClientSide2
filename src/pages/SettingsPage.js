@@ -3,13 +3,12 @@ import Cookies from "universal-cookie";
 import axios from "axios";
 import './SettingsPage.css';
 
-
-
 class SettingsPage extends React.Component{
     state = {
         listOrganizations : [],
         token : "",
-        response : ""
+        response : "loading..."
+
     }
 
     componentDidMount() {
@@ -26,56 +25,48 @@ class SettingsPage extends React.Component{
             .then((response) => {
                 if(response.data.success) {
                     this.setState({
+                        response : "", // clearing the response
                         listOrganizations: response.data.dataSet
                     })
                 }
-            })
-    }
-
-    removeRelationshipUO = (organizationId) => {
-        const cookies = new Cookies();
-        axios.get("http://localhost:8989/remove-relationshipUO", {
-            params: {
-                token: cookies.get("logged_in"),
-                organizationId
-            }
-        })
-            .then((response) => {
-                if(response.data.success) {
-                    const currentOrganizations = this.state.listOrganizations;
+                else{
                     this.setState({
-                        listOrganizations: currentOrganizations
+                        response : "there was a problem to get organizations from database!"
                     })
                 }
             })
     }
 
-    addRelationshipUO = (organizationId) => {
+    changeRelationshipUO = (organization) => {
         const cookies = new Cookies();
-        axios.get("http://localhost:8989/add-relationshipUO", {
+        axios.get("http://localhost:8989/change-relationshipUO", {
             params: {
                 token: cookies.get("logged_in"),
-                organizationId
+                organizationId: organization.object.id,
+                friendShip : organization.belongsToUser
             }
         })
             .then((response) => {
-                if(response.data.success) {
-                    const currentOrganizations = this.state.listOrganizations;
-                    this.setState({
-                        listOrganizations: currentOrganizations
-                    })
-                }
+                this.setState({
+                    response : "changed " + organization.object.name + " friendship " + (response.data.success ? "successfully" : "failed!")
+                })
             })
     }
 
+
+    changeFriendShip = (organization) =>{
+        organization.belongsToUser = !organization.belongsToUser
+        this.setState({
+            response : "loading..."
+        })
+        this.changeRelationshipUO(organization)
+    }
 
 render() {
-    const listUsersOrganizations = this.state.listOrganizations.filter(organization =>{
-            return organization.belongsToUser
-    })
+
     return (
         <div>
-            kkkkkkkkkkkkkkkkkkkkk
+            <span style={{color : "blue"}}>  {this.state.response}</span>
             {
                 this.state.listOrganizations.length > 0 &&
                 this.state.listOrganizations.map(organization => {
@@ -94,17 +85,19 @@ render() {
                             </p>
 
                             <h1>Member</h1>
+                            yes <input onChange={() => this.changeFriendShip(organization)}
+                                type={"radio"}
+                                name={"radio-yes-" + organization.object.name}// the name has to be different for each radio button
+                                value={"yes"}
+                                checked={organization.belongsToUser === true}
+                                />
+                            no <input onChange={() => this.changeFriendShip(organization)}
+                                type={"radio"}
+                                name={"radio-no-" + organization.object.name} // the name has to be different for each radio button
+                                value={"no"}
+                                checked={organization.belongsToUser !== true}
+                            />
 
-                            <label className="container" onClick={() => this.addRelationshipUO(organization.id)}>Yes
-                                <input type="radio" name="radio" checked={organization.belongsToUser}/>
-                                <div className="checkmark"></div>
-                            </label>
-
-                            <label className="container" onClick={() => this.removeRelationshipUO(organization.id)}>No
-                                <input type="radio" name="radio" checked={organization.belongsToUser} />
-                                <div className="checkmark"></div>
-                            </label>
-oits]r
                         </div>
                     )
                 })
@@ -116,3 +109,12 @@ oits]r
 
 }
 export default SettingsPage;
+/*<label className="container" onClick={() => this.addRelationshipUO(organization.id)}>Yes
+                                <input type="radio" name="radio" checked={organization.belongsToUser}/>
+                                <div className="checkmark"></div>
+                            </label>
+
+                            <label className="container" onClick={() => this.removeRelationshipUO(organization.id)}>No
+                                <input type="radio" name="radio" checked={!(organization.belongsToUser)} />
+                                <div className="checkmark"></div>
+                            </label>*/
