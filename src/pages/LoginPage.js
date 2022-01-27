@@ -3,8 +3,7 @@ import * as React from "react";
 import Cookies from "universal-cookie";
 import axios from "axios";
 import {NavLink} from "react-router-dom";
-import constants from "./Constants";
-import * as Constants from "constants";
+import Constants from "../Constants";
 
 class LoginPage extends React.Component {
 
@@ -28,7 +27,7 @@ class LoginPage extends React.Component {
     }
 
     login = () => {
-        axios.get("http://localhost:8989/login", {
+        axios.get(Constants.SERVER_URL + "login", {
             params: {
                 username: this.state.username,
                 password: this.state.password
@@ -37,20 +36,14 @@ class LoginPage extends React.Component {
             .then((response) => {
                 if (response.data.success) {
                     const cookies = new Cookies();
-                    cookies.set("logged_in", response.data.dataSet[Constants.FIRST_OBJECT]);
+                    cookies.set("logged_in", response.data.dataSet[Constants.FIRST_OBJECT]); // gets the first object which is the token
                     this.setState({response : ""})
                     window.location.reload()
                 }
                 else {
                     switch (response.data.errorCode) {
-                        case constants.INCORRECT_USERNAME:
-                            this.setState({response: "username is incorrect!"});
-                            break;
-                        case constants.INCORRECT_PASSWORD:
-                            this.setState({response: "password is incorrect! you tried " + response.data.dataString + " out of 5 tries!"});
-                            break;
-                        case constants.GENERAL_ERROR:
-                            this.setState({response: "something went wrong!"});
+                        case Constants.ERROR_CODE:
+                            this.setState({response: "the credentials you provided are wrong!"});
                             break;
                         default:
                             this.setState({response: "invalid error code!"});
@@ -63,6 +56,7 @@ class LoginPage extends React.Component {
     render() {
         return (
             <div>
+                aaaaa
                 <div id="frame" class={"container2"}>
                     <div>
                         <b id="title">Login page</b>
@@ -89,7 +83,7 @@ class LoginPage extends React.Component {
                     <button id="button"  style={{backgroundColor: "darkblue"}}
                             disabled={this.state.password.length === 0 || this.state.username.length === 0}
                             onClick={this.login}>Login</button>
-                    <NavLink to={"/sign-up"} >
+                    <NavLink to={"/signup"} >
                         <button id={"button"} style={{backgroundColor: "green"}} >Sign Up</button>
                     </NavLink>
                     <br/>

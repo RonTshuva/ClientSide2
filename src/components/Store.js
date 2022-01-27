@@ -2,6 +2,7 @@ import * as React from "react";
 import axios from "axios";
 import Sale from "./Sale";
 import Cookies from "universal-cookie";
+import Constants from "../Constants";
 
 
 
@@ -18,12 +19,12 @@ class Store extends React.Component {
         //const storeId = this.props.match.params.storeId;
         //this.getStoreByStoreId(1);
         //this.getSalesByStoreId(1);
-        
+
         this.setState({
             storeId: this.props.match.params.storeId
         })
         const cookies = new Cookies();
-        axios.get(serverPath + "/get-sales-for-one-shop", {
+        axios.get(Constants.SERVER_URL + "/get-sales-for-one-shop", {
             params: {
                 token: cookies.get("myWebsiteToken"),
                 storeId: this.props.match.params.storeId
@@ -39,11 +40,11 @@ class Store extends React.Component {
         this.getShops();
 
     }
-    
-    
+
+
 
     getStoreByStoreId = (storeId) =>{
-        axios.get("http://localhost:8989/getStoreByStoreId", {
+        axios.get(Constants.SERVER_URL + "getStoreByStoreId", {
             params: {
                 storeId : storeId,
             }
@@ -63,7 +64,7 @@ class Store extends React.Component {
     }
 
     getSalesByStoreId = (storeId) => {
-        axios.get("http://localhost:8989/getSalesByStoreId", {
+        axios.get(Constants.SERVER_URL + "getSalesByStoreId", {
             params: {
                 storeId : storeId,
             }

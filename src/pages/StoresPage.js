@@ -1,7 +1,7 @@
 import * as React from "react";
 import Cookies from "universal-cookie";
 import axios from "axios";
-
+import Constants from "../Constants";
 
 class StoresPage extends React.Component {
 
@@ -17,7 +17,7 @@ class StoresPage extends React.Component {
     }
 
     getAllStores = () => {
-        axios.get("http://localhost:8989/get-stores", {
+        axios.get(Constants.SERVER_URL + "get-stores", {
         })
             .then((response) => {
                 if(response.data.success) {

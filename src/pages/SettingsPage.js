@@ -2,6 +2,7 @@ import * as React from "react";
 import Cookies from "universal-cookie";
 import axios from "axios";
 import './SettingsPage.css';
+import Constants from "../Constants";
 
 class SettingsPage extends React.Component{
     state = {
@@ -17,7 +18,7 @@ class SettingsPage extends React.Component{
 
     getAllOrganizations = () => {
         const cookies = new Cookies();
-        axios.get("http://localhost:8989/get-organizations", {
+        axios.get(Constants.SERVER_URL + "get-organizations", {
             params: {
                 token: cookies.get("logged_in")
             }
@@ -39,7 +40,7 @@ class SettingsPage extends React.Component{
 
     changeRelationshipUO = (organization) => {
         const cookies = new Cookies();
-        axios.get("http://localhost:8989/change-relationshipUO", {
+        axios.get(Constants.SERVER_URL + "change-relationshipUO", {
             params: {
                 token: cookies.get("logged_in"),
                 organizationId: organization.object.id,

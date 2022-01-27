@@ -1,6 +1,7 @@
-import './App.css';
+import '../App.css';
 import React from "react";
 import {NavLink} from "react-router-dom";
+import Cookies from "universal-cookie/lib";
 
 
 class NavigationBar extends React.Component {
@@ -13,8 +14,10 @@ class NavigationBar extends React.Component {
         ]
     }
 
-    logOut = () => {
-        this.props.removeTokenFromApp()
+    signOut = () => {
+        const cookies = new Cookies();
+        cookies.remove("logged_in");
+        window.location.reload();
     }
 
     render() {
@@ -34,7 +37,7 @@ class NavigationBar extends React.Component {
                 }
                 {/*Another logout link that calls the function logOut*/}
                 <div className={"link"}>
-                    <div className={"linkText"} onClick={this.logOut}> Log Out </div>
+                    <div className={"linkText"} onClick={this.signOut}> Log Out </div>
                 </div>
             </div>
         );

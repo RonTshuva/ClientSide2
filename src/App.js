@@ -12,12 +12,13 @@ import axios from "axios";
 import StoresPage from "./pages/StoresPage";
 import Store from "./components/Store";
 import NavigationBar from "./components/NavigationBar";
+import Constants from "./Constants";
 
 class App extends React.Component {
 
     state = {
         isLoggedIn: false,
-        firstTime: false
+        isFirstTime: false
     }
 
 // first method at atart to check if theres a login coockie:
@@ -30,7 +31,7 @@ class App extends React.Component {
 // Method --- --- --- Chck if port is true ! ~~~ ~~~ ~~~
     validateToken = (token) => {
         axios.get(
-            "http://localhost:8989/validateToken", {params: {token: token}}
+            Constants.SERVER_URL + "validateToken", {params: {token: token}}
         ).then(
             (response) => {
                 this.setState({isLoggedIn: response.data.success});
@@ -38,11 +39,18 @@ class App extends React.Component {
         )
     }
 
-    removeToken = () => {
+    isFirstTime = () => {
         const cookies = new Cookies();
-        cookies.remove("logged_in");
-        window.location.reload();
+        axios.get(
+            Constants.SERVER_URL + "isFirstTime", {params: {token: cookies.get("logged_in")}}
+        ).then(
+            (response) => {
+                this.setState({isFirstTime: response.data.success});
+            }
+        )
     }
+
+
 
 // The render only create Routes for now according to existance of login coockie.
     render() {
@@ -54,18 +62,22 @@ class App extends React.Component {
                             {
                                 this.state.isLoggedIn ?
                                     <div>
-                                        <NavigationBar removeTokenFromApp={this.removeToken}/>
+                                        <NavigationBar/>
                                         <Routes>
-                                            <Route path={"/"} element={<SettingsPage/>}/>
+                                            {
+                                                this.state.isFirstTime ?
+                                                    <Route path={"/"} element={<SettingsPage/>}/>
+                                                    :
+                                                    <Route path={"/"} element={<Dashboard/>}/>
+                                            }
+                                            <Route path={"/settings"} element={<SettingsPage/>}/>
                                             <Route path={"/dashboard"} element={<Dashboard/>}/>
                                             <Route path={"/search"} element={<SearchPage/>}/>
-                                            <Route path={"/login"} element={<LoginPage/>}/>
                                             {/*
                                             <Route path={"/"} element = {<StoresPage/>}/>
                                             <Route path="/store/:id" component={<Store />} />
                                             */}
                                         </Routes>
-
                                     </div>
                                     :
                                     <div>
@@ -74,7 +86,6 @@ class App extends React.Component {
                                             <Route path={"/login"} element={<LoginPage/>}/>
                                             <Route path={"/signUp"} element={<SignUpPage/>}/>
                                         </Routes>
-
                                     </div>
                             }
                         </div>

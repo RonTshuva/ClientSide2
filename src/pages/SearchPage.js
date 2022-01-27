@@ -2,6 +2,7 @@ import * as React from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import UsersSale from "../components/Sale";
+import Constants from "../Constants";
 
 class SearchPage extends React.Component{
 
@@ -27,12 +28,12 @@ class SearchPage extends React.Component{
 
     getSales = () => {
         const cookies = new Cookies();
-        axios.get("http://localhost:8989/get-sales",{
+        axios.get(Constants.SERVER_URL + "get-sales",{
             params:{
                 token : cookies.get("logged_in")
             }
         }).then((response) =>{
-            if(response.data.success) {
+            if(response.data.success == true) {
                 this.setState({
                     response : response.data.dataSet.length > 0 ? "successfully loaded sales" : "no sales found!",
                     sales : response.data.dataSet

@@ -2,6 +2,7 @@ import * as React from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import UsersSale from "../components/Sale";
+import Constants from "../Constants";
 
 class Dashboard extends React.Component{
 
@@ -20,7 +21,7 @@ class Dashboard extends React.Component{
     //cookies.get("logged_in")
     getSales = () => {
         const cookies = new Cookies();
-        axios.get("http://localhost:8989/get-sales",{
+        axios.get(Constants.SERVER_URL + "get-sales",{
             params:{
                 token : cookies.get("logged_in")
             }
@@ -33,11 +34,6 @@ class Dashboard extends React.Component{
             }
         })
     }
-
-
-
-
-
 
     render() {
         const salesFiltered = this.state.sales.filter(sale => {
