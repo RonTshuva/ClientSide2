@@ -8,6 +8,9 @@ import SetupPage from "./pages/SetupPage";
 //important imports:
 import Cookies from "universal-cookie/lib";
 import axios from "axios";
+import SettingsPage from "./pages/SettingsPage";
+import StoresPage from "./pages/StoresPage";
+import StoreComponent from "./components/StoreComponent";
 
 class App extends React.Component {
 
@@ -68,6 +71,10 @@ class App extends React.Component {
                                             <Route path={"/dashboard"} element={<Dashboard/>}/>
                                             <Route path={"/searchPage"} element={<SearchPage/>}/>
                                             <Route path={"/login"} element={<LoginPage/>}/>
+                                            {/*
+                                            <Route path={"/"} element = {<StoresPage/>}/>
+                                            <Route path="/store/:id" component={<StoreComponent />} />
+                                            */}
                                         </Routes>
                                     </div>
                                     : //if not

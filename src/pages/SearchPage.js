@@ -1,7 +1,7 @@
 import * as React from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import Sale from "../components/Sale";
+import UsersSale from "../components/UsersSale";
 
 class SearchPage extends React.Component{
 
@@ -48,7 +48,7 @@ class SearchPage extends React.Component{
         }).map(sale => {
             return (
                 <div style={{color : sale.belongsToUser ? "green" : "red"}}>
-                    --------------- <Sale object={sale.object}/>
+                    --------------- <UsersSale object={sale.object}/>
                 </div>
             )
         })
