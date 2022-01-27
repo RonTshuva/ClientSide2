@@ -1,16 +1,17 @@
+import './App.css';
 import * as React from "react";
 import Dashboard from "./pages/Dashboard";
 import LoginPage from "./pages/LoginPage.js";
 import SignUpPage from "./pages/SignUpPage.js";
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import SearchPage from "./pages/SearchPage";
-import SetupPage from "./pages/SetupPage";
+import SettingsPage from "./pages/SettingsPage";
 //important imports:
 import Cookies from "universal-cookie/lib";
 import axios from "axios";
-import SettingsPage from "./pages/SettingsPage";
 import StoresPage from "./pages/StoresPage";
 import StoreComponent from "./components/StoreComponent";
+import NavigationBar from "./components/NavigationBar";
 
 class App extends React.Component {
 
@@ -37,7 +38,7 @@ class App extends React.Component {
             }
         )
     }
-        // Method to check if first time of user on the site
+    // Method to check if first time of user on the site
     isFirstTime = (token) => {
         axios.get(
             "http://localhost:8989/isFirstTime", {params: {token: token}}
@@ -48,6 +49,15 @@ class App extends React.Component {
         )
     }
 
+    removeToken = () => {
+        const cookies = new Cookies();
+        cookies.remove("myWebsiteToken");
+        this.setState({
+            isLoggedIn: false
+        })
+        window.location.reload();
+    }
+
 // The render only create Routes for now according to existance of login coockie.
     render() {
         return (
@@ -55,35 +65,30 @@ class App extends React.Component {
                 <BrowserRouter>
                     {
                         <div>
-                            {   //Condition
+                            {
                                 this.state.isLoggedIn ?
-                                    //if login coockie exist
                                     <div>
+                                        <NavigationBar removeTokenFromApp={this.removeToken}/>
                                         <Routes>
-                                            {if(this.state.firstTime)
-                                            {
-                                                <Route path={"/"} element={<SetupPage/>}/>
-                                                this.setState.firstTime = false;
-                                            }
-                                                else
-                                                <Route path={"/"} element={<Dashboard/>}/>
-                                            }
+                                            <Route path={"/"} element={<SettingsPage/>}/>
                                             <Route path={"/dashboard"} element={<Dashboard/>}/>
-                                            <Route path={"/searchPage"} element={<SearchPage/>}/>
+                                            <Route path={"/search"} element={<SearchPage/>}/>
                                             <Route path={"/login"} element={<LoginPage/>}/>
                                             {/*
                                             <Route path={"/"} element = {<StoresPage/>}/>
                                             <Route path="/store/:id" component={<StoreComponent />} />
                                             */}
                                         </Routes>
+
                                     </div>
-                                    : //if not
+                                    :
                                     <div>
                                         <Routes>
                                             <Route path={"/"} element={<LoginPage/>}/>
                                             <Route path={"/login"} element={<LoginPage/>}/>
-                                            <Route path={"/sign-up"} element={<SignUpPage/>}/>
+                                            <Route path={"/signUp"} element={<SignUpPage/>}/>
                                         </Routes>
+
                                     </div>
                             }
                         </div>
@@ -92,6 +97,8 @@ class App extends React.Component {
             </div>
         )
     }
+
 }
 
 export default App;
+

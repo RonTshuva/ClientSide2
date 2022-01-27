@@ -1,4 +1,3 @@
-import './App.css';
 import './LoginPage.css'
 import * as React from "react";
 import Cookies from "universal-cookie";
@@ -65,15 +64,13 @@ class LoginPage extends React.Component {
     render() {
         return (
             <div>
-
-                <div id="frame" class={"container"}>
+                <div id="frame" class={"container2"}>
                     <div>
                         <b id="title">Login page</b>
                         <br/>
-                        <span class={"midTitle"}>Enter your login credentials</span>
+                        <span class={"midTitle"}>Enter credentials</span>
                         <br/>
                         <b> Username:</b>
-                        <br/>
                         <input class={"detailsOfClient"}
                                onChange={this.onUsernameChange}
                                value={this.state.username}
@@ -81,7 +78,7 @@ class LoginPage extends React.Component {
                         />
                         <br/>
                         <b > Password:</b>
-                        <br/>
+
                         <input class={"detailsOfClient"}
                                onChange={this.onPasswordChange}
                                value={this.state.password}
@@ -90,11 +87,11 @@ class LoginPage extends React.Component {
                         <br/>
                         <br/>
                     </div>
-                    <button id="button"  style={{backgroundColor: "darkgreen"}}
+                    <button id="button"  style={{backgroundColor: "darkblue"}}
                             disabled={this.state.password.length === 0 || this.state.username.length === 0}
                             onClick={this.login}>Login</button>
                     <NavLink to={"/sign-up"} >
-                        <button id={"button"} style={{backgroundColor: "magenta"}} >Sign Up</button>
+                        <button id={"button"} style={{backgroundColor: "green"}} >Sign Up</button>
                     </NavLink>
                     <br/>
                     {
