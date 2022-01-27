@@ -1,7 +1,7 @@
 import * as React from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import UsersSale from "../components/UsersSale";
+import UsersSale from "../components/Sale";
 
 class SearchPage extends React.Component{
 

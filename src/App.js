@@ -10,15 +10,14 @@ import SettingsPage from "./pages/SettingsPage";
 import Cookies from "universal-cookie/lib";
 import axios from "axios";
 import StoresPage from "./pages/StoresPage";
-import StoreComponent from "./components/StoreComponent";
+import Store from "./components/Store";
 import NavigationBar from "./components/NavigationBar";
 
 class App extends React.Component {
 
-
     state = {
         isLoggedIn: false,
-        firstTime: true
+        firstTime: false
     }
 
 // first method at atart to check if theres a login coockie:
@@ -38,23 +37,10 @@ class App extends React.Component {
             }
         )
     }
-    // Method to check if first time of user on the site
-    isFirstTime = (token) => {
-        axios.get(
-            "http://localhost:8989/isFirstTime", {params: {token: token}}
-        ).then(
-            (response) => {
-                this.setState({firstTime: response.data.success});
-            }
-        )
-    }
 
     removeToken = () => {
         const cookies = new Cookies();
-        cookies.remove("myWebsiteToken");
-        this.setState({
-            isLoggedIn: false
-        })
+        cookies.remove("logged_in");
         window.location.reload();
     }
 
@@ -76,7 +62,7 @@ class App extends React.Component {
                                             <Route path={"/login"} element={<LoginPage/>}/>
                                             {/*
                                             <Route path={"/"} element = {<StoresPage/>}/>
-                                            <Route path="/store/:id" component={<StoreComponent />} />
+                                            <Route path="/store/:id" component={<Store />} />
                                             */}
                                         </Routes>
 

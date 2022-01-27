@@ -1,23 +1,46 @@
 import * as React from "react";
 import axios from "axios";
-import UsersSale from "./UsersSale";
+import Sale from "./Sale";
+import Cookies from "universal-cookie";
 
 
-class StoreComponent extends React.Component {
+
+class Store extends React.Component {
 
     state = {
-        listSales :[],
-        store : {},
+        saleList :[],
+        store : {}, //store is: {id , area , category , name}
         response : "loading..."
     }
 
     componentDidMount() {
-
         this.setState({response : "params are : " + this.props.match.params.id})
         //const storeId = this.props.match.params.storeId;
         //this.getStoreByStoreId(1);
         //this.getSalesByStoreId(1);
+        
+        this.setState({
+            storeId: this.props.match.params.storeId
+        })
+        const cookies = new Cookies();
+        axios.get(serverPath + "/get-sales-for-one-shop", {
+            params: {
+                token: cookies.get("myWebsiteToken"),
+                storeId: this.props.match.params.storeId
+            }
+        })
+            .then((response) => {
+                if (response.data) {
+                    this.setState({
+                        sales: response.data
+                    })
+                }
+            })
+        this.getShops();
+
     }
+    
+    
 
     getStoreByStoreId = (storeId) =>{
         axios.get("http://localhost:8989/getStoreByStoreId", {
@@ -48,7 +71,7 @@ class StoreComponent extends React.Component {
             .then((response) => {
                 if(response.data.success) {
                     this.setState({
-                        listSales: response.data.dataSet,
+                        saleList: response.data.dataSet,
                         response : ""
                     })
                 }else{
@@ -70,6 +93,7 @@ class StoreComponent extends React.Component {
         )
     }
 
+    //-----------------------------------------------------------------------------//
     render() {
         return(
             <div>
@@ -83,10 +107,10 @@ class StoreComponent extends React.Component {
                 <br/>
                 <ul>
                     {
-                        this.state.listSales.map(sale => {
+                        this.state.saleList.map(sale => {
                             return(
                                 <li>
-                                    <UsersSale data={sale}/>
+                                    <Sale data={sale}/>
                                     <br/><br/>
                                 </li>
                             )
@@ -100,7 +124,7 @@ class StoreComponent extends React.Component {
 
     }
 }
-export default StoreComponent;
+export default Store;
 
 
 

@@ -1,13 +1,13 @@
-function UsersSale(props) {
+function Sale(props) {
 
     return (
-        <div>
+        <div className={"sale"} style={props.style}>
             Description: {props.object.description}<br/>
-            Expiration date: {props.object.expirationDate}<br/>
             Store name: {props.object.store.name}<br/>
+            Expiration date: {props.object.expirationDate}<br/>
             Area: {props.object.store.area}<br/>
         </div>
     )
 }
 
-export default UsersSale;
+export default Sale;

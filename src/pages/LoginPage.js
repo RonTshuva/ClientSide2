@@ -3,9 +3,11 @@ import * as React from "react";
 import Cookies from "universal-cookie";
 import axios from "axios";
 import {NavLink} from "react-router-dom";
-import errorCodes from "./ErrorCodes";
+import constants from "./Constants";
+import * as Constants from "constants";
 
 class LoginPage extends React.Component {
+
     state = {
         username: "",
         password: "",
@@ -35,22 +37,19 @@ class LoginPage extends React.Component {
             .then((response) => {
                 if (response.data.success) {
                     const cookies = new Cookies();
-                    cookies.set("logged_in", response.data.dataString);
+                    cookies.set("logged_in", response.data.dataSet[Constants.FIRST_OBJECT]);
                     this.setState({response : ""})
                     window.location.reload()
                 }
                 else {
                     switch (response.data.errorCode) {
-                        case errorCodes.INCORRECT_USERNAME:
+                        case constants.INCORRECT_USERNAME:
                             this.setState({response: "username is incorrect!"});
                             break;
-                        case errorCodes.INCORRECT_PASSWORD:
+                        case constants.INCORRECT_PASSWORD:
                             this.setState({response: "password is incorrect! you tried " + response.data.dataString + " out of 5 tries!"});
                             break;
-                        case errorCodes.BLOCKED_ACCOUNT:
-                            this.setState({response: "account '" + this.state.username + "' is blocked!"});
-                            break;
-                        case errorCodes.GENERAL_ERROR:
+                        case constants.GENERAL_ERROR:
                             this.setState({response: "something went wrong!"});
                             break;
                         default:
