@@ -56,7 +56,6 @@ class LoginPage extends React.Component {
     render() {
         return (
             <div>
-                aaaaa
                 <div id="frame" class={"container2"}>
                     <div>
                         <b id="title">Login page</b>

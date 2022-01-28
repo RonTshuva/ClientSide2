@@ -14,11 +14,25 @@ class Store extends React.Component {
         response : "loading..."
     }
 
+
+    /* how componentDidMount supposed to look like:
+       componentDidMount() {
+            const storeId = this.props.match.params.id  // getting the id from the URL , for example http://localhost:3000/store/3 so the id equals to Etti's
+            this.getStoreByStoreId(storeId);
+            this.getSalesByStoreId(storeId);
+
+            // after we called these 2 functions we are good because "saleList and store" in the state have all the information we need... so now we need to just render it
+       }
+    */
+
+
     componentDidMount() {
         this.setState({response : "params are : " + this.props.match.params.id})
         //const storeId = this.props.match.params.storeId;
         //this.getStoreByStoreId(1);
         //this.getSalesByStoreId(1);
+
+
 
         this.setState({
             storeId: this.props.match.params.storeId
@@ -40,6 +54,7 @@ class Store extends React.Component {
         this.getShops();
 
     }
+
 
 
 

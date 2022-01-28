@@ -13,42 +13,54 @@ import StoresPage from "./pages/StoresPage";
 import Store from "./components/Store";
 import NavigationBar from "./components/NavigationBar";
 import Constants from "./Constants";
+import Sale from "./components/Sale";
 
 class App extends React.Component {
 
+
     state = {
         isLoggedIn: false,
-        isFirstTime: false
+        isFirstTime: false,
+        notificationsList: [],
+
     }
 
 // first method at atart to check if theres a login coockie:
     componentDidMount() {
         const cookies = new Cookies();
-        this.validateToken(cookies.get("logged_in"));
-        this.isFirstTime();
+
+        if(cookies.get("logged_in")){
+            this.validateToken(cookies.get("logged_in"));
+            this.establishSocket();
+        }
+
     }
 
-// Method --- --- --- Chck if port is true ! ~~~ ~~~ ~~~
+    establishSocket = () =>{
+        const cookies = new Cookies();
+        const ws  = new WebSocket("ws://localhost:8989/stream?token=" + cookies.get("logged_in"))
+        ws.onmessage = (notification) => {
+            const data = JSON.parse(notification.data)
+            const list = this.state.notificationsList.concat(data.message)
+            this.setState({
+                notificationsList : list
+            })
+        }
+    }
+
     validateToken = (token) => {
         axios.get(
             Constants.SERVER_URL + "validateToken", {params: {token: token}}
         ).then(
             (response) => {
-                this.setState({isLoggedIn: response.data.success});
+                this.setState({
+                    isLoggedIn: response.data.success,
+                    isFirstTime : response.data.isFirstTime
+                });
             }
         )
     }
 
-    isFirstTime = () => {
-        const cookies = new Cookies();
-        axios.get(
-            Constants.SERVER_URL + "isFirstTime", {params: {token: cookies.get("logged_in")}}
-        ).then(
-            (response) => {
-                this.setState({isFirstTime: response.data.success});
-            }
-        )
-    }
 
 
 
@@ -56,6 +68,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
+
                 <BrowserRouter>
                     {
                         <div>
@@ -89,8 +102,19 @@ class App extends React.Component {
                                     </div>
                             }
                         </div>
+
                     }
                 </BrowserRouter>
+                {
+                    this.state.notificationsList.length > 0 &&
+                    this.state.notificationsList.map(notification =>{
+                        return(
+                            <div>
+                                {notification}
+                            </div>
+                        )
+                    })
+                }
             </div>
         )
     }
