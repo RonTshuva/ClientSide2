@@ -72,10 +72,9 @@ class App extends React.Component {
                                 <NavigationBar/>
                                 {
                                     this.state.isFirstTime ?
-                                        <Redirect to={"/settings"} />
+                                        <Route path={"/"} component={SettingsPage} exact={true}/>
                                         :
-                                        <Redirect to={"/dashboard"} />
-
+                                        <Route path={"/"} component={Dashboard} exact={true}/>
                                 }
                                 <Route path={"/dashboard"} component={Dashboard} exact={true}/>
                                 <Route path={"/stores"} component={StoresPage} exact={true}/>
@@ -94,11 +93,6 @@ class App extends React.Component {
             </div>
         )
     }
-
-
-
-
-
 }
 export default App;
 
