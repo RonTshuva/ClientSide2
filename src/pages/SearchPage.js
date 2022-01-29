@@ -33,7 +33,7 @@ class SearchPage extends React.Component{
                 token : cookies.get("logged_in")
             }
         }).then((response) =>{
-            if(response.data.success == true) {
+            if(response.data.success) {
                 this.setState({
                     response : response.data.dataSet.length > 0 ? "successfully loaded sales" : "no sales found!",
                     sales : response.data.dataSet
@@ -45,7 +45,7 @@ class SearchPage extends React.Component{
 
     search = (text) =>{
         const result = this.state.sales.filter(sale =>{
-            return sale.object.description.includes(text)
+            return sale.object.description.toLowerCase().includes(text.toLowerCase())
         }).map(sale => {
             return (
                 <div style={{color : sale.belongsToUser ? "green" : "red"}}>

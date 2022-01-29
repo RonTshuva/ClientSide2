@@ -1,78 +1,46 @@
-import * as React from "react";
+import React from "react";
 import axios from "axios";
 import Sale from "./Sale";
-import Cookies from "universal-cookie";
 import Constants from "../Constants";
+const serverPath = "http://localhost:8989";
+const emptyArray = 0;
 
-
+// Need to FIX - can't take the data from the server Response!!!!
+// Need to FIX - can't take the data from the server Response!!!!
+// Need to FIX - can't take the data from the server Response!!!!
 
 class Store extends React.Component {
-
     state = {
-        saleList :[],
+        id: "", // Un-used
         store : {}, //store is: {id , area , category , name}
+        sales: [],
         response : "loading..."
     }
 
-
-    /* how componentDidMount supposed to look like:
-       componentDidMount() {
-            const storeId = this.props.match.params.id  // getting the id from the URL , for example http://localhost:3000/store/3 so the id equals to Etti's
-            this.getStoreByStoreId(storeId);
-            this.getSalesByStoreId(storeId);
-
-            // after we called these 2 functions we are good because "saleList and store" in the state have all the information we need... so now we need to just render it
-       }
-    */
-
-
     componentDidMount() {
-        this.setState({response : "params are : " + this.props.match.params.id})
-        //const storeId = this.props.match.params.storeId;
-        //this.getStoreByStoreId(1);
-        //this.getSalesByStoreId(1);
-
-
-
-        this.setState({
-            storeId: this.props.match.params.storeId
-        })
-        const cookies = new Cookies();
-        axios.get(Constants.SERVER_URL + "/get-sales-for-one-shop", {
-            params: {
-                token: cookies.get("myWebsiteToken"),
-                storeId: this.props.match.params.storeId
-            }
-        })
-            .then((response) => {
-                if (response.data) {
-                    this.setState({
-                        sales: response.data
-                    })
-                }
-            })
-        this.getShops();
-
+        const passed = this.props.match.params.id;
+        this.setState({id: passed})
+        this.getStoreByStoreId(this.state.id);
+        this.getSalesByStoreId(this.state.id);
     }
 
-
-
-
+// Get the store details - Returns an Object inside an array so it's in the first place
     getStoreByStoreId = (storeId) =>{
         axios.get(Constants.SERVER_URL + "getStoreByStoreId", {
             params: {
-                storeId : storeId,
+                storeId : this.state.id,
             }
         })
             .then((response) => {
                 if(response.data.success) {
                     this.setState({
-                        store: response.data.dataSet[0],
+                        //May be response.data.dataset[0] to get object
+                        store: response.data.dataset[0],
                         response : ""
                     })
                 }else{
                     this.setState({
-                        response : "there was a problem getting sales from db!"
+                        response : "there was a problem getting sales from db in getStoreByStoreId"
                     })
                 }
             })
@@ -81,7 +49,7 @@ class Store extends React.Component {
     getSalesByStoreId = (storeId) => {
         axios.get(Constants.SERVER_URL + "getSalesByStoreId", {
             params: {
-                storeId : storeId,
+                storeId : this.state.id,
             }
         })
             .then((response) => {
@@ -92,57 +60,38 @@ class Store extends React.Component {
                     })
                 }else{
                     this.setState({
-                        response : "there was a problem getting sales from db!"
+                        response : "there was a problem getting sales from db! in getSalesByStoreId"
                     })
                 }
             })
     }
 
 
-    showStore = () =>{
+    render() {
         return (
             <div>
-                store's name: {this.state.store.name} <br/>
-                store's area: {this.state.store.area} <br/>
-                store's category: {this.state.store.category} <br/>
-            </div>
-        )
-    }
-
-    //-----------------------------------------------------------------------------//
-    render() {
-        return(
-            <div>
-                in StoreComponent
-                <span style={{color : "blue"}}>{this.state.response} </span>
-                <br/>
-                Store Page:<br/>
-                ------------------------------------
-                {this.showStore()}
-                --------------------
-                <br/>
-                <ul>
+                <header>Sales For Shop number {this.state.id} </header>
+                <div className={"SalesContainer"}>
+                    <br/>
+                    Store's name: {this.state.store.name} <br/>
+                    Store's area: {this.state.store.area} <br/>
+                    <br/>
+                    Sales are:
+                    <br/>
                     {
-                        this.state.saleList.map(sale => {
-                            return(
-                                <li>
-                                    <Sale data={sale}/>
-                                    <br/><br/>
-                                </li>
-                            )
-                        })
+                        this.state.sales.length === emptyArray ?
+                            <div>There are no sales to this shop (Empty array from getSalesByStoreId) </div>
+                            :
+                            this.state.sales.map((sale) => {
+                                return <Sale sale={sale}/>
+                            })
                     }
-                </ul>
-
-                ------------------------------------
+                </div>
             </div>
         )
-
     }
 }
+
 export default Store;
-
-
-
 
 

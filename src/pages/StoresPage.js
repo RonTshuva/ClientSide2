@@ -2,6 +2,7 @@ import * as React from "react";
 import Cookies from "universal-cookie";
 import axios from "axios";
 import Constants from "../Constants";
+import {Link} from "react-router-dom";
 
 class StoresPage extends React.Component {
 
@@ -20,7 +21,7 @@ class StoresPage extends React.Component {
         axios.get(Constants.SERVER_URL + "get-stores", {
         })
             .then((response) => {
-                if(response.data.success) {
+                if(response.data.success ) {
                     this.setState({
                         listStores: response.data.dataSet,
                         response : ""
@@ -51,7 +52,9 @@ class StoresPage extends React.Component {
                         this.state.listStores.map(store => {
                             return(
                                 <li>
-                                    <span> {store.name}</span>
+                                    <Link to={"/stores/" + store.id}>
+                                        <h3> {store.name}  </h3>
+                                    </Link>
                                     <br/><br/>
                                 </li>
                             )

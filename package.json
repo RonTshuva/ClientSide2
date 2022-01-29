@@ -1,15 +1,19 @@
 {
-  "name": "client_side_task2",
+  "name": "untitled",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.24.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-router": "^6.2.1",
+    "react-icons": "^4.3.1",
+    "react-router": "^5.2.1",
+    "react-router-dom": "^5.3.0",
     "react-scripts": "5.0.0",
+    "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.2"
   },
   "scripts": {
@@ -35,10 +39,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "axios": "^0.24.0",
-    "react-router-dom": "^6.2.1",
-    "universal-cookie": "^4.0.4"
   }
 }
