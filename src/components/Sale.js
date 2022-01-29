@@ -3,19 +3,22 @@ import './Sale.css';
 function Sale(props) {
 
     return (
-        <div className={"sale"} style={{
-            margin: "20px",
+        <div  style={{
             padding: "10px",
             borderRadius: "10px",
             backgroundColor: "#F3EBF6",
-            boxShadow: "8px 8px 8px grey",
-            width: "auto",
-            height: "auto"
+            boxShadow: "6px 8px 6px grey",
+            height: "auto",
+            margin: "5px",
+            border: "1px solid #ccc",
+            float: "left",
+            width: "180px"
+
         }}>
-            <h3 style={{color: "#096c30", fontSize: "30px"}}>
+            <h3 style={{color: "#096c30", fontSize: "20px"}}>
                 Description: {props.object.description}<br/>
             </h3>
-            <h4 style={{color: "black", fontSize: "20px"}}>
+            <h4 style={{color: "black", fontSize: "12px"}}>
                 Store name: {props.object.store.name}<br/>
             </h4>
             <p style={{

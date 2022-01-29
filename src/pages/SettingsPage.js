@@ -74,7 +74,7 @@ render() {
                     return (
                         <div style={{borderBottom: "1px solid blue", padding: "10px", width: "300px"}}>
 
-                            <i style={{fontSize: "12px"}}>
+                            <i style={{fontSize: "16px"}}>
                                 {organization.object.name}
                             </i>
                             <p style={{fontSize: "8px"}}>
@@ -85,7 +85,7 @@ render() {
                                 Members :{organization.object.members}
                             </p>
 
-                            <h1>Member</h1>
+                            <span>Member:    </span>
                             yes <input onChange={() => this.changeFriendShip(organization)}
                                 type={"radio"}
                                 name={"radio-yes-" + organization.object.name}// the name has to be different for each radio button

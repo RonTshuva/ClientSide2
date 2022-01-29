@@ -49,9 +49,10 @@ class SearchPage extends React.Component{
             return sale.object.description.toLowerCase().includes(text.toLowerCase())
         }).map(sale => {
             return (
-                <div style={{color : sale.belongsToUser ? "green" : "red"}}>
-                    --------------- <UsersSale object={sale.object}/>
-                </div>
+                    <span style={{color : sale.belongsToUser ? "green" : "red"}}>
+                     <UsersSale object={sale.object}/>
+                    </span>
+
             )
         })
         this.setState({ searchResult : result})
@@ -66,6 +67,7 @@ class SearchPage extends React.Component{
                 <input class = {"container2"} placeholder={"Search: (ex: iphone,tel....)"}
                        onChange={this.onSearchBarChange}
                        value={this.state.searchText} />
+                       <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
                 {this.state.searchResult.length > 0 && this.state.searchResult}
                 <br/>
 

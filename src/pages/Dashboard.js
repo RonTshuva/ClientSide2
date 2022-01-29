@@ -41,17 +41,16 @@ class Dashboard extends React.Component{
         })
         const salesMapped = salesFiltered.map(sale =>{
             return(
-                <div>
-                    --------------------------------
+                <span>
                    <UsersSale object={sale.object}/>
-                    --------------------------------
-                </div>
+                </span>
             )
         })
 
         return(
             <div>
-                DashBoard:
+                <div id={"h1"} className={"title"}>DashBoard</div>
+                <br/> <br/> <br/> <br/> <br/> <br/>
                 {salesMapped.length > 0 && salesMapped}
             </div>
         )

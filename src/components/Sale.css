@@ -8,8 +8,11 @@
     /* box-shadow: flag ? 8px 8px 8px green : 8px 8px 8px red; */
     width: auto;
     height: auto;
+    float: left;
 
 }
+
+
 
 .button {
     width: 140px;

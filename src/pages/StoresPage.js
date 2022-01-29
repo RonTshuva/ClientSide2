@@ -44,10 +44,8 @@ class StoresPage extends React.Component {
             <div>
                 <span class={"shopName"} style={{color : "blue"}}>{this.state.response} </span>
                 <br/>
-                <div id={"h1"} className={"title"}>Stores List:</div>
-                <br/>
-                ------------------------------------
-                <br/>
+                <div id={"h1"} className={"title"}>Stores:</div>
+                <br/>  <br/>  <br/>  <br/>  <br/>
                 <ul>
                     {
                         this.state.listStores.map(store => {
@@ -62,8 +60,6 @@ class StoresPage extends React.Component {
                         })
                     }
                 </ul>
-
-                ------------------------------------
             </div>
         )
 
