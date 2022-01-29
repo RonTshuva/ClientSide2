@@ -3,7 +3,7 @@ import * as React from "react";
 import Dashboard from "./pages/Dashboard";
 import LoginPage from "./pages/LoginPage.js";
 import SignUpPage from "./pages/SignUpPage.js";
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {BrowserRouter, Route} from 'react-router-dom';
 import SearchPage from "./pages/SearchPage";
 import SettingsPage from "./pages/SettingsPage";
 import StoresPage from "./pages/StoresPage";
@@ -85,7 +85,7 @@ class App extends React.Component {
                             :
                             <div>
                                 <Route path={"/"} component={LoginPage} exact={true}/>
-                                <Route path={"/login"} component={LoginPage} exact={true}/>
+                                <Route path={"/login"} component={LoginPage} exact={true} />
                                 <Route path={"/signUp"} component={SignUpPage} exact={true}/>
                             </div>
                     }

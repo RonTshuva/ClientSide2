@@ -66,13 +66,14 @@ class LoginPage extends React.Component {
     render() {
         return (
             <div>
-                <div id="frame" class={"container2"}>
+                <b id={"h1"} className={"title"}>Login page</b>
+                <div class={"container1"}>
                     <div>
-                        <b id="title">Login page</b>
                         <br/>
                         <span class={"midTitle"}>Enter credentials</span>
-                        <br/>
+                        <br/> <br/>
                         <b> Username:</b>
+                        <br/>
                         <input class={"detailsOfClient"}
                                onChange={this.onUsernameChange}
                                value={this.state.username}
@@ -80,7 +81,7 @@ class LoginPage extends React.Component {
                         />
                         <br/>
                         <b > Password:</b>
-
+                        <br/>
                         <input class={"detailsOfClient"}
                                onChange={this.onPasswordChange}
                                value={this.state.password}
@@ -89,11 +90,11 @@ class LoginPage extends React.Component {
                         <br/>
                         <br/>
                     </div>
-                    <button id="button"  style={{backgroundColor: "darkblue"}}
+                    <button class ={"button"}  style={{backgroundColor: "mediumseagreen"}}
                             disabled={this.state.password.length === 0 || this.state.username.length === 0}
                             onClick={this.login}>Login</button>
                     <NavLink to={"/signup"} >
-                        <button id={"button"} style={{backgroundColor: "green"}} >Sign Up</button>
+                        <button class={"button"} style={{backgroundColor: "mediumseagreen"}} >Sign Up</button>
                     </NavLink>
                     <br/>
                     {

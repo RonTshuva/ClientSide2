@@ -9,50 +9,6 @@
     box-shadow: 0  2px  5px  -2px rgba(0,0,0,0.75);
 }
 
-.button {
-    width: 140px;
-    height: 25px;
-    font-family: 'Roboto', sans-serif;
-    font-size: 15px;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-weight: 350;
-    color: #ffffff;
-    background-color: #6d8dce;
-    border: none;
-    border-radius: 25px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease 0s;
-    cursor: pointer;
-}
-
-.button:hover {
-    background-color: #6adada;
-    box-shadow: 0 15px 20px rgb(211, 155, 213);
-    color: #000000;
-    transform: translateY(-7px);
-}
-.button:active {
-    background-color: #6adada;
-
-}
-
-
-{/*  --------------------------------------------------  */}
-
-
-
-.title {
-    font-size: 80px;
-    font-family: sans-serif;
-    text-align: left;
-    color: #f66dcb;
-    background-image: -webkit-linear-gradient(92deg, #b673d0, #e1c095);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -webkit-animation: hue 1s infinite linear;
-    margin-left: 30px;
-}
 
 .headline {
     text-align: left;

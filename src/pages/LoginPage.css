@@ -1,18 +1,23 @@
 
-.container {
-    transform: translate(-10px, 200px) scale(2);
-    text-align: left;
-}
 
-.container2 {
-    transform: translate(-10px, 200px) scale(2);
-    text-align: left;
+.container1 {
+    transform: translate(30px, 350px) scale(1.2);
+    text-align:center;
 }
 .detailsOfClient {
-    border: 2px black;
-    border-radius: 2px;
+    color: black;
+    border: 2px solid darkgray;
+    border-radius: 8px;
     margin: auto;
-    padding: 1px;
+    padding: 2px;
+    background: transparent;
+}
+
+.input-item {
+    background: #fff;
+    color: #333;
+    padding: 14.5px 0px 15px 9px;
+    border-radius: 5px 0px 0px 5px;
 }
 
 .LoginPageError {
@@ -22,7 +27,8 @@
 }
 
 .midTitle {
-
+    font-style:italic;
+    font-family: Sofia;
 }
 
 .buttons {
@@ -31,42 +37,18 @@
 
 /* From app css */
 
-body {
-    background-color: #bff3e6;
-
-}
 
 #frame {
     background-color: #b2def6;
-    width: 520px;
+    width: 320px;
     height: 200px;
-    border-radius: 4px;
+    border-radius: 9px;
     margin-left: auto;
     margin-right: auto;
-    border: 4px double #000;
-}
-
-
-#title {
-    margin: auto;
-    font-family: "Adobe Devanagari", monospace;
-    font-style: oblique;
-    font-size: 35px;
-    color: #0055ff;
-    max-width: 500px;
+    border: 8px double slategrey;
 
 }
 
-#button {
-    text-shadow: 2px 2px 3px antiquewhite;
-    width: 75px;
-    height: 24px;
-    font-size: 11px;
-    text-align: center;
-    color: aliceblue;
-    border-radius: 8px;
-    max-width: 500px;
-}
 
 .App {
     text-align: left;

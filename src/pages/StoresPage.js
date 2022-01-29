@@ -42,9 +42,10 @@ class StoresPage extends React.Component {
 
         return(
             <div>
-                <span style={{color : "blue"}}>{this.state.response} </span>
+                <span class={"shopName"} style={{color : "blue"}}>{this.state.response} </span>
                 <br/>
-                Stores List:<br/>
+                <div id={"h1"} className={"title"}>Stores List:</div>
+                <br/>
                 ------------------------------------
                 <br/>
                 <ul>

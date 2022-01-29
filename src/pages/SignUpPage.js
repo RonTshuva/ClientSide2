@@ -68,15 +68,17 @@ class SignUpPage extends React.Component {
 
     render() {
         return (
-            <div id="frame" class={"container2"}>
-
-                <b id="title">Sign-Up Page</b>
+            <div>
+            <b id={"h1"} className={"title"}>Sign-Up Page</b>
+            <div class={"container1"}>
                 <br/>
-                <div>Please, Enter username and password</div>
+                <div class={"midTitle"}>Please, Enter username and password</div>
+                <br/>
                 <b> Username:</b>
                 <br/>
                 <input
-                        onChange={this.onUsernameChange}
+                       class={"detailsOfClient"}
+                       onChange={this.onUsernameChange}
                        value={this.state.username}
                        placeholder={"Enter username"}
                 />
@@ -88,6 +90,7 @@ class SignUpPage extends React.Component {
                 <b>Password:</b>
                 <br/>
                 <input
+                       class={"detailsOfClient"}
                        onChange={this.onPasswordChange}
                        value={this.state.password}
                        placeholder={"Enter password"}
@@ -99,16 +102,17 @@ class SignUpPage extends React.Component {
                 }
                 <br/>
                 <NavLink to={"/login"}>
-                    <button id="button" style={{backgroundColor: "darkblue"}}>Back</button>
+                    <button class={"button"} style={{backgroundColor: "mediumseagreen"}}>Back</button>
                 </NavLink>
 
-                <button id ="button" style={{backgroundColor: "green"}} onClick={this.signUp}>Create</button>
+                <button class={"button"} style={{backgroundColor: "mediumseagreen"}} onClick={this.signUp}>Create</button>
                 {
                     this.state.responseServer.length > 0 &&
                     <div style={{color : this.state.responseColor}}>{this.state.responseServer}</div>
 
                 }
 
+            </div>
             </div>
         )
     }

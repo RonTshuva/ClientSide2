@@ -1,3 +1,4 @@
+import './SearchPage.css';
 import * as React from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
@@ -61,18 +62,16 @@ class SearchPage extends React.Component{
 
         return(
             <div>
-                <input placeholder={"Search: (ex: iphone,tel....)"}
+                <div id={"h1"} class={"title"}>Search</div>
+                <input class = {"container2"} placeholder={"Search: (ex: iphone,tel....)"}
                        onChange={this.onSearchBarChange}
                        value={this.state.searchText} />
                 {this.state.searchResult.length > 0 && this.state.searchResult}
                 <br/>
 
-
             </div>
         )
     }
-
-
 
 }
 export default SearchPage;
