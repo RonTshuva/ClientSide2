@@ -1,0 +1,27 @@
+.sale {
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #F3EBF6;
+    /* box-shadow: flag ? 8px 8px 8px green : 8px 8px 8px red; */
+    width: auto;
+    height: auto;
+
+}
+
+.button {
+    width: 140px;
+    height: 25px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 350;
+    color: #ffffff;
+    background-color: #6d8dce;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+}

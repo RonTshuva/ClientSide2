@@ -1,16 +1,15 @@
-import '../App.css';
 import React from "react";
 import {NavLink} from "react-router-dom";
 import Cookies from "universal-cookie/lib";
-
+import './NavigationBar.css';
 
 class NavigationBar extends React.Component {
     state = {
         links: [
-            { title: "Dashboard", path: "/dashboard" },
-            { title: "Stores", path: "/stores" },
-            { title: "Search", path: "/search" },
-            { title: "Settings", path: "/settings" }
+            {title: "Dashboard", path: "/dashboard"},
+            {title: "Stores", path: "/stores"},
+            {title: "Search", path: "/search"},
+            {title: "Settings", path: "/settings"}
         ]
     }
 
@@ -22,27 +21,33 @@ class NavigationBar extends React.Component {
 
     render() {
         return (
-            <div id={"NavigationBar"}>
+            <div id={"NavigationBar"} style={{marginRight: "20px", marginLeft: "20px", paddingRight: "20px"}}>
                 {   //show links with map for each Path (Link) decalared in state
                     this.state.links.map(link => {
                         return (
                             //Define a navigation link: it's destination in header, and title design
-                            <NavLink className={"link"} to={link.path} activeClassName={"active"}>
-                                <div className={"linkText"}>
-                                    {link.title}
+                            <NavLink className={"linkText"} to={link.path} activeClassName={"active"}>
+                                <div className={"link"} style={{marginBottom: "10px"}}>
+                                    <button className={"button"}>
+                                        {link.title}
+                                    </button>
                                 </div>
                             </NavLink>
                         );
                     })
                 }
                 {/*Another logout link that calls the function logOut*/}
-                <NavLink className={"link"} to={"/"} activeClassName={"active"} onClick={this.signOut}> {/*notice we need to redirect to '/' so it will re render the login page*/}
+                <NavLink className={"button"} to={"/"} activeClassName={"active"}
+                         onClick={this.signOut}> {/*notice we need to redirect to '/' so it will re render the login page*/}
                     <div className={"linkText"}>
-                        Log-Out
+                        <button className='button'>
+                            Logout
+                        </button>
                     </div>
                 </NavLink>
             </div>
-        );
+        )
+            ;
     }
 }
 
