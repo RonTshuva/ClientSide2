@@ -26,6 +26,16 @@ class LoginPage extends React.Component {
         })
     }
 
+    componentDidMount() {
+        const cookies = new Cookies();
+        if(cookies.get("logged_in")){
+            this.setState({
+                response : "Loading..."
+            })
+        }
+
+    }
+
     login = () => {
         axios.get(Constants.SERVER_URL + "login", {
             params: {
@@ -37,7 +47,7 @@ class LoginPage extends React.Component {
                 if (response.data.success) {
                     const cookies = new Cookies();
                     cookies.set("logged_in", response.data.dataSet[Constants.FIRST_OBJECT]); // gets the first object which is the token
-                    this.setState({response : ""})
+                    this.setState({response : "Loading..."})
                     window.location.reload()
                 }
                 else {
@@ -91,8 +101,6 @@ class LoginPage extends React.Component {
                         <div class={"LoginPageError"} > {this.state.response}</div>
                     }
                 </div>
-
-
             </div>
         )
     }

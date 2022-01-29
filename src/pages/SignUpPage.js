@@ -4,8 +4,8 @@ import {NavLink} from "react-router-dom";
 
 class SignUpPage extends React.Component {
     state = {
-        username: "aa",
-        password: "aaa",
+        username: "",
+        password: "",
         responseServer : "",
         passwordError: "",
         usernameError : "",
@@ -53,11 +53,13 @@ class SignUpPage extends React.Component {
                 .then((response) => {
                     if (response.data.success) {
                         this.setState({
-                            responseServer: "You signed up!"
+                            responseServer: "You signed up successfully! (please log back in)",
+                            responseColor : "green"
                         })
                     } else {
                         this.setState({
-                            responseServer: "user already exist"
+                            responseServer: "user already exist",
+                            responseColor : "red"
                         })
                     }
                 })
@@ -103,7 +105,7 @@ class SignUpPage extends React.Component {
                 <button id ="button" style={{backgroundColor: "green"}} onClick={this.signUp}>Create</button>
                 {
                     this.state.responseServer.length > 0 &&
-                    <div>{this.state.responseServer}</div>
+                    <div style={{color : this.state.responseColor}}>{this.state.responseServer}</div>
 
                 }
 

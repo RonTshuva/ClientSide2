@@ -84,9 +84,9 @@ class App extends React.Component {
                             </div>
                             :
                             <div>
-                                <Route path={"/"} component={LoginPage}/>
-                                <Route path={"/login"} component={LoginPage} />
-                                <Route path={"/signUp"} component={SignUpPage}/>
+                                <Route path={"/"} component={LoginPage} exact={true}/>
+                                <Route path={"/login"} component={LoginPage} exact={true}/>
+                                <Route path={"/signUp"} component={SignUpPage} exact={true}/>
                             </div>
                     }
                 </BrowserRouter>
