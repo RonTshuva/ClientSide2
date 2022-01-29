@@ -90,6 +90,16 @@ class App extends React.Component {
                             </div>
                     }
                 </BrowserRouter>
+                {
+                    this.state.notificationsList.length > 0 &&
+                    this.state.notificationsList.map(notification =>{
+                        return(
+                            <div>
+                                {notification}
+                            </div>
+                        )
+                    })
+                }
             </div>
         )
     }
