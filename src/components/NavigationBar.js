@@ -2,7 +2,7 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 import Cookies from "universal-cookie/lib";
 import './NavigationBar.css';
-
+/* Shai givati ? then i bati*/
 class NavigationBar extends React.Component {
     state = {
         links: [
@@ -38,17 +38,12 @@ class NavigationBar extends React.Component {
                 }
                 {/*Another logout link that calls the function logOut*/}
                 <NavLink className={"link"} to={"/login"} activeClassName={"active"} onClick={this.signOut}> {/*notice we need to redirect to '/' so it will re render the login page*/}
-                <NavLink className={"button"} to={"/"} activeClassName={"active"}
-                         onClick={this.signOut}> {/*notice we need to redirect to '/' so it will re render the login page*/}
                     <div className={"linkText"}>
-                        <button className='button'>
-                            Logout
-                        </button>
+                        Log-Out
                     </div>
                 </NavLink>
             </div>
-        )
-            ;
+        );
     }
 }
 
