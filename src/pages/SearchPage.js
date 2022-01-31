@@ -2,7 +2,7 @@ import './SearchPage.css';
 import * as React from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import UsersSale from "../components/Sale";
+import Sale from "../components/Sale";
 import Constants from "../Constants";
 
 class SearchPage extends React.Component{
@@ -50,7 +50,7 @@ class SearchPage extends React.Component{
         }).map(sale => {
             return (
                     <span style={{color : sale.belongsToUser ? "green" : "red"}}>
-                     <UsersSale object={sale.object}/>
+                     <Sale object={sale.object}/>
                     </span>
 
             )

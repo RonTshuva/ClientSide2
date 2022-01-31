@@ -2,8 +2,9 @@ import './LoginPage.css'
 import * as React from "react";
 import Cookies from "universal-cookie";
 import axios from "axios";
-import {NavLink} from "react-router-dom";
+import {NavLink, Route} from "react-router-dom";
 import Constants from "../Constants";
+import SignUpPage from "./SignUpPage";
 
 class LoginPage extends React.Component {
 
@@ -44,14 +45,15 @@ class LoginPage extends React.Component {
             }
         })
             .then((response) => {
+                const data = JSON.parse(response.data.dataSet[Constants.FIRST_OBJECT])
                 if (response.data.success) {
                     const cookies = new Cookies();
-                    cookies.set("logged_in", response.data.dataSet[Constants.FIRST_OBJECT]); // gets the first object which is the token
+                    cookies.set("logged_in", data.token); // gets the first object which is the token
                     this.setState({response : "Loading..."})
                     window.location.reload()
                 }
                 else {
-                    switch (response.data.errorCode) {
+                    switch (data.errorCode) {
                         case Constants.ERROR_CODE:
                             this.setState({response: "the credentials you provided are wrong!"});
                             break;
@@ -90,9 +92,12 @@ class LoginPage extends React.Component {
                         <br/>
                         <br/>
                     </div>
-                    <button class ={"button"}  style={{backgroundColor: "mediumseagreen"}}
-                            disabled={this.state.password.length === 0 || this.state.username.length === 0}
-                            onClick={this.login}>Login</button>
+                    <NavLink to={"/login"} >
+                        <button class={"button"}
+                                style={{backgroundColor: "mediumseagreen"}}
+                                disabled={this.state.password.length === 0 || this.state.username.length === 0}
+                                onClick={this.login}>Login</button>
+                    </NavLink>
                     <NavLink to={"/signup"} >
                         <button class={"button"} style={{backgroundColor: "mediumseagreen"}} >Sign Up</button>
                     </NavLink>

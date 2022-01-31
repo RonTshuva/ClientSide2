@@ -36,12 +36,10 @@ class NavigationBar extends React.Component {
                         );
                     })
                 }
-                {/*Another logout link that calls the function logOut*/}
-                <NavLink className={"link"} to={"/login"} activeClassName={"active"} onClick={this.signOut}> {/*notice we need to redirect to '/' so it will re render the login page*/}
-                    <div className={"linkText"}>
-                        Log-Out
-                    </div>
-                </NavLink>
+                {/*Another logout link that calls the function signOut*/}
+                <button className={"button"}  onClick={this.signOut}> {/*notice we need to redirect to '/' so it will re render the login page*/}
+                     Log-Out
+                </button>
             </div>
         );
     }

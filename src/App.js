@@ -54,12 +54,26 @@ class App extends React.Component {
             Constants.SERVER_URL + "validateToken", {params: {token: token}}
         ).then(
             (response) => {
+                const data = JSON.parse(response.data.dataSet[Constants.FIRST_OBJECT])
                 this.setState({
-                    isLoggedIn: response.data.success,
-                    isFirstTime: response.data.isFirstTime
+                    isLoggedIn: data.success,
+                    isFirstTime: data.isFirstTime
                 });
             }
         )
+    }
+
+    allRoutesToPage = (pageName) =>{
+      return(
+          <div>
+              <Route path={"/"} component={pageName == false ? Dashboard : pageName} exact={true}/>
+              <Route path={"/dashboard"} component={pageName == false ? Dashboard : pageName} exact={true}/>
+              <Route path={"/stores"} component={pageName == false ? StoresPage : pageName} exact={true}/>
+              <Route path={"/stores/:id"} component={pageName == false ? Store : pageName} exact={true}/>
+              <Route path={"/search"} component={pageName == false ? SearchPage : pageName} exact={true}/>
+              <Route path={"/settings"} component={pageName == false ? SettingsPage : pageName} exact={true}/>
+          </div>
+      )
     }
 
     render() {
@@ -72,21 +86,20 @@ class App extends React.Component {
                                 <NavigationBar/>
                                 {
                                     this.state.isFirstTime ?
-                                        <Route path={"/"} component={SettingsPage} exact={true}/>
+                                        <Route path={"/login"} component={SettingsPage} exact={true} />
                                         :
-                                        <Route path={"/"} component={Dashboard} exact={true}/>
+                                        <Route path={"/login"} component={Dashboard} exact={true} />
                                 }
-                                <Route path={"/dashboard"} component={Dashboard} exact={true}/>
-                                <Route path={"/stores"} component={StoresPage} exact={true}/>
-                                <Route path={"/stores/:id"} component={Store} exact={true}/>
-                                <Route path={"/search"} component={SearchPage} exact={true}/>
-                                <Route path={"/settings"} component={SettingsPage} exact={true}/>
+                                {
+                                    this.allRoutesToPage(false)
+                                }
                             </div>
                             :
                             <div>
-                                <Route path={"/"} component={LoginPage} exact={true}/>
-                                <Route path={"/login"} component={LoginPage} exact={true} />
+                                {this.allRoutesToPage(LoginPage)}
+                                <Route path={"/login"} component={LoginPage} exact={true}/>
                                 <Route path={"/signUp"} component={SignUpPage} exact={true}/>
+
                             </div>
                     }
                 </BrowserRouter>
