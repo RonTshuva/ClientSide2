@@ -15,8 +15,6 @@ class SearchPage extends React.Component{
     }
 
     componentDidMount(){
-        const cookies = new Cookies();
-        cookies.set("logged_in",'AAA'); // just for testing
         this.getSales();
     }
 
