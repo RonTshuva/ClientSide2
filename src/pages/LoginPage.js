@@ -45,15 +45,15 @@ class LoginPage extends React.Component {
             }
         })
             .then((response) => {
-                const data = JSON.parse(response.data.dataSet[Constants.FIRST_OBJECT])
                 if (response.data.success) {
+                    const token = response.data.dataSet[Constants.FIRST_OBJECT]
                     const cookies = new Cookies();
-                    cookies.set("logged_in", data.token); // gets the first object which is the token
+                    cookies.set("logged_in", token); // gets the first object which is the token
                     this.setState({response : "Loading..."})
                     window.location.reload()
                 }
                 else {
-                    switch (data.errorCode) {
+                    switch (response.data.errorCode) {
                         case Constants.ERROR_CODE:
                             this.setState({response: "the credentials you provided are wrong!"});
                             break;
