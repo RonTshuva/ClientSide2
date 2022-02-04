@@ -90,7 +90,7 @@ class Store extends React.Component {
                                 )
                             })
                             :
-                            <div>There are no sales to this shop (Empty array from getSalesByStoreId) </div>
+                            <div>There are no sales to this shop </div>
 
                     }
                 </div>

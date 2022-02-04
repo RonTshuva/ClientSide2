@@ -48,16 +48,17 @@ class StoresPage extends React.Component {
                 <br/>  <br/>  <br/>  <br/>  <br/>
                 <ul>
                     {
-                        this.state.listStores.map(store => {
-                            return(
-                                <li>
-                                    <Link to={"/stores/" + store.id}>
-                                        <h3> {store.name}  </h3>
-                                    </Link>
-                                    <br/><br/>
-                                </li>
-                            )
-                        })
+                        this.state.listStores.length > 0 &&
+                            this.state.listStores.map(store => {
+                                return(
+                                    <li>
+                                        <Link to={"/stores/" + store.id}>
+                                            <h3> {store.name}  </h3>
+                                        </Link>
+                                        <br/><br/>
+                                    </li>
+                                )
+                            })
                     }
                 </ul>
             </div>
